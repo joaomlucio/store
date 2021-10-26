@@ -10,6 +10,6 @@ class ProductsModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/:storeName', child: (_, args) => ProductsPage(storeName: args.params['storeName'])),
+    ChildRoute('/', child: (_, args) => ProductsPage(categoryName: args.data)),
   ];
 }

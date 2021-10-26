@@ -20,14 +20,44 @@ class ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        children: <Widget>[
-          Image.network(auth.user!.photoURL!),
-          Text(auth.user!.displayName.toString()),
-          Text(auth.user!.email.toString()),
-          IconButton(
-              onPressed: login.logOut, icon: const Icon(Icons.logout_outlined)),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    auth.user!.photoURL!,
+                    fit:BoxFit.cover,
+                    scale: 1.2,
+                  )
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text("Fullname: ${auth.user!.displayName}"),
+                      Text("Email: ${auth.user!.email}"),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            ElevatedButton(
+              onPressed: login.logOut,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text("LOGOUT"),
+                  Icon(Icons.logout_outlined),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

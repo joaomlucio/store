@@ -9,39 +9,48 @@ part of 'products_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ProductsStore on _ProductsStoreBase, Store {
-  final _$valueAtom = Atom(name: '_ProductsStoreBase.value');
+  final _$productsAtom = Atom(name: '_ProductsStoreBase.products');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  ObservableList<ProductModel> get products {
+    _$productsAtom.reportRead();
+    return super.products;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set products(ObservableList<ProductModel> value) {
+    _$productsAtom.reportWrite(value, super.products, () {
+      super.products = value;
     });
   }
 
-  final _$_ProductsStoreBaseActionController =
-      ActionController(name: '_ProductsStoreBase');
+  final _$stateAtom = Atom(name: '_ProductsStoreBase.state');
 
   @override
-  void increment() {
-    final _$actionInfo = _$_ProductsStoreBaseActionController.startAction(
-        name: '_ProductsStoreBase.increment');
-    try {
-      return super.increment();
-    } finally {
-      _$_ProductsStoreBaseActionController.endAction(_$actionInfo);
-    }
+  State get state {
+    _$stateAtom.reportRead();
+    return super.state;
+  }
+
+  @override
+  set state(State value) {
+    _$stateAtom.reportWrite(value, super.state, () {
+      super.state = value;
+    });
+  }
+
+  final _$startAsyncAction = AsyncAction('_ProductsStoreBase.start');
+
+  @override
+  Future<dynamic> start(dynamic _params) {
+    return _$startAsyncAction.run(() => super.start(_params));
   }
 
   @override
   String toString() {
     return '''
-value: ${value}
+products: ${products},
+state: ${state}
     ''';
   }
 }

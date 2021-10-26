@@ -1,28 +1,51 @@
 import 'dart:convert';
 
 class ProductModel {
-  
   final int id;
-  
-  final String name;
-  
+
+  final String title;
+
+  final String description;
+
+  final String image;
+
+  final String category;
+
   final double price;
 
-  ProductModel({required this.id, required this.name, required this.price});
+  final Map<String, dynamic> rating;
+
+  ProductModel({
+      required this.rating, 
+      required this.title,
+      required this.description,
+      required this.image,
+      required this.category,
+      required this.id,
+      required this.price});
+
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name': name,
+      'title': title,
+      'description': description,
+      'image': image,
+      'category': category,
       'price': price,
+      'rating': rating,
     };
   }
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
       id: map['id'],
-      name: map['name'],
-      price: map['price'],
+      title: map['title'],
+      description: map['description'],
+      image: map['image'],
+      category: map['category'],
+      price: map['price'].runtimeType != double ? map['price'].toDouble() : map['price'],
+      rating: Map<String, dynamic>.from(map['rating']),
     );
   }
 

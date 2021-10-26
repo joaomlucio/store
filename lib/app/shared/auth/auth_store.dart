@@ -24,7 +24,7 @@ abstract class _AuthStoreBase with Store {
   }
 
   _AuthStoreBase() {
-    _authRepository.getGoogleLogin().then((value) => setUser(value));
+    _authRepository.getUser().then((value) => setUser(value));
   }
 
   Future logOut() {
@@ -33,5 +33,6 @@ abstract class _AuthStoreBase with Store {
 
   Future loginWithGoogle() async {
     user = await _authRepository.getGoogleLogin();
+    return user;
   }
 }

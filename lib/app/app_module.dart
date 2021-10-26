@@ -3,18 +3,22 @@ import 'package:store/app/modules/login/login_module.dart';
 import 'package:store/app/modules/login/login_store.dart';
 import 'package:store/app/modules/products/products_module.dart';
 import 'package:store/app/modules/purchase/purchase_module.dart';
+import 'package:store/app/modules/purchase/submodules/cart/cart_store.dart';
 import 'package:store/app/modules/start/start_module.dart';
 import 'package:store/app/shared/auth/auth_store.dart';
 import 'package:store/app/shared/auth/repositories/auth_repository.dart';
 import 'package:store/app/shared/auth/repositories/auth_repository_interface.dart';
 import 'package:store/app/shared/pages/splash_page.dart';
+import 'package:store/app/modules/products/products_store.dart';
 
 class AppModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton<IAuthRepository>((i) => AuthRepository()),
-    Bind.singleton((i) => AuthStore()),
-    Bind.singleton((i) => LoginStore()),
+    Bind<IAuthRepository>((i) => AuthRepository()),
+    Bind((i) => AuthStore()),
+    Bind((i) => LoginStore()),
+    Bind((i) => CartStore()),
+    Bind((i) => ProductsStore()),
   ];
 
   @override

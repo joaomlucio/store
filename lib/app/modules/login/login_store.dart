@@ -16,16 +16,20 @@ abstract class _LoginStoreBase with Store {
   Future loginWithGoogle() async {
     try {
       loading = true;
-      await auth.loginWithGoogle();
-      Modular.to.navigate('/start/');
+      var user = await auth.loginWithGoogle();
+      if (user != null) {
+        Modular.to.navigate('/start/');
+      }
     } catch (e) {
-      loading = false;
+      rethrow;
     }
+    loading = false;
   }
 
   //@action
   logOut() {
     Modular.get<AuthStore>().logOut();
+    loading = false;
     Modular.to.navigate('/login/');
   }
 }

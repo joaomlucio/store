@@ -9,39 +9,64 @@ part of 'store_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$StoreStore on _StoreStoreBase, Store {
-  final _$valueAtom = Atom(name: '_StoreStoreBase.value');
+  final _$productsAtom = Atom(name: '_StoreStoreBase.products');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  ObservableList<ProductModel> get products {
+    _$productsAtom.reportRead();
+    return super.products;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set products(ObservableList<ProductModel> value) {
+    _$productsAtom.reportWrite(value, super.products, () {
+      super.products = value;
     });
   }
 
-  final _$_StoreStoreBaseActionController =
-      ActionController(name: '_StoreStoreBase');
+  final _$categoriesAtom = Atom(name: '_StoreStoreBase.categories');
 
   @override
-  void increment() {
-    final _$actionInfo = _$_StoreStoreBaseActionController.startAction(
-        name: '_StoreStoreBase.increment');
-    try {
-      return super.increment();
-    } finally {
-      _$_StoreStoreBaseActionController.endAction(_$actionInfo);
-    }
+  ObservableList<String> get categories {
+    _$categoriesAtom.reportRead();
+    return super.categories;
+  }
+
+  @override
+  set categories(ObservableList<String> value) {
+    _$categoriesAtom.reportWrite(value, super.categories, () {
+      super.categories = value;
+    });
+  }
+
+  final _$stateAtom = Atom(name: '_StoreStoreBase.state');
+
+  @override
+  State get state {
+    _$stateAtom.reportRead();
+    return super.state;
+  }
+
+  @override
+  set state(State value) {
+    _$stateAtom.reportWrite(value, super.state, () {
+      super.state = value;
+    });
+  }
+
+  final _$startAsyncAction = AsyncAction('_StoreStoreBase.start');
+
+  @override
+  Future<dynamic> start() {
+    return _$startAsyncAction.run(() => super.start());
   }
 
   @override
   String toString() {
     return '''
-value: ${value}
+products: ${products},
+categories: ${categories},
+state: ${state}
     ''';
   }
 }
