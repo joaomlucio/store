@@ -18,7 +18,7 @@ class AppModule extends Module {
     Bind((i) => AuthStore()),
     Bind((i) => LoginStore()),
     Bind((i) => CartStore()),
-    Bind((i) => ProductsStore()),
+    Bind.factory((i) => ProductsStore()),
   ];
 
   @override
