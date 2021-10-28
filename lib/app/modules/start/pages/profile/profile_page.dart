@@ -23,39 +23,39 @@ class ProfilePageState extends State<ProfilePage> {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          //mainAxisAlignment: MainAxisAlignment.center,
+          //crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    auth.user!.photoURL!,
-                    fit:BoxFit.cover,
-                    scale: 1.2,
-                  )
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text("Fullname: ${auth.user!.displayName}"),
-                      Text("Email: ${auth.user!.email}"),
-                    ],
-                  ),
-                ),
-              ],
+            ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(
+                  auth.user!.photoURL!,
+                  fit: BoxFit.cover,
+                  scale: 1.2,
+                )
             ),
-            ElevatedButton(
-              onPressed: login.logOut,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text("LOGOUT"),
-                  Icon(Icons.logout_outlined),
-                ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top:15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Fullname: ${auth.user!.displayName}", overflow: TextOverflow.ellipsis,),
+                    Text("Email: ${auth.user!.email}", overflow: TextOverflow.ellipsis),
+                  ],
+                ),
               ),
             ),
+            ElevatedButton(
+                  onPressed: login.logOut,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text("LOGOUT"),
+                      Icon(Icons.logout_outlined),
+                    ],
+                  ),
+                )
           ],
         ),
       ),
