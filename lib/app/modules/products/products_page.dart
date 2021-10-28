@@ -33,51 +33,49 @@ class ProductsPageState extends State<ProductsPage> {
           title: Text(
               widget.categoryName.replaceAll('/category/', '').toUpperCase()),
         ),
-        body: SingleChildScrollView(
-          child: Observer(builder: (BuildContext context) {
-            if (store.state == stt.State.started) {
-              return GridView.builder(
-                  shrinkWrap: true,
-                  itemCount: store.products.length,
-                  physics: const ScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: .7),
-                  itemBuilder: (BuildContext context, int index) {
-                    return InkWell(
-                      child: Card(
-                        margin: const EdgeInsets.all(10),
-                        child: Column(children: [
-                          ClipRRect(
-                              child: Image.network(store.products[index].image,
-                                  width: 100, height: 100, fit: BoxFit.fill)),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Text(store.products[index].title),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Row(
-                                    children: [
-                                      const Text("Price: "),
-                                      Text("${store.products[index].price}"),
-                                    ],
-                                  ),
+        body: Observer(builder: (BuildContext context) {
+          if (store.state == stt.State.started) {
+            return GridView.builder(
+                shrinkWrap: true,
+                itemCount: store.products.length,
+                physics: const ScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, childAspectRatio: .7),
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    child: Card(
+                      margin: const EdgeInsets.all(10),
+                      child: Column(children: [
+                        ClipRRect(
+                            child: Image.network(store.products[index].image,
+                                width: 100, height: 100, fit: BoxFit.fill)),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text(store.products[index].title),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Row(
+                                  children: [
+                                    const Text("Price: "),
+                                    Text("${store.products[index].price}"),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          )
-                        ]),
-                      ),
-                      onTap: () {
-                        Modular.to.pushNamed('/purchase/',
-                            arguments: store.products[index]);
-                      },
-                    );
-                  });
-            } else {
-              return const Center(child: CircularProgressIndicator());
-            }
-          }),
-        ));
+                              ),
+                            ],
+                          ),
+                        )
+                      ]),
+                    ),
+                    onTap: () {
+                      Modular.to.pushNamed('/purchase/',
+                          arguments: store.products[index]);
+                    },
+                  );
+                });
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        }));
   }
 }
